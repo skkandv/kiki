@@ -69,19 +69,19 @@
 <!-- Кнопки-фильтры -->
 <div class="container mb-5">
     <div class="d-flex justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="200">
-        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn category-btn active" data-filter="all">
+        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn active" data-filter="all">
             <i class="bi bi-grid-3x3-gap-fill me-2"></i>Все товары
         </button>
-        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn category-btn" data-filter="dogs">
+        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn" data-filter="dogs">
             <i class="bi bi-emoji-smile me-2"></i>🐕 Собаки
         </button>
-        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn category-btn" data-filter="cats">
+        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn" data-filter="cats">
             <i class="bi bi-emoji-smile me-2"></i>🐈 Кошки
         </button>
-        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn category-btn" data-filter="fish">
+        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn" data-filter="fish">
             <i class="bi bi-water me-2"></i>🐟 Рыбки
         </button>
-        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn category-btn" data-filter="toys">
+        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn" data-filter="toys">
             <i class="bi bi-controller me-2"></i>🎾 Игрушки
         </button>
     </div>
@@ -143,11 +143,7 @@
 <script src="cart.js"></script>
 <script>
     // Инициализация AOS
-    AOS.init({ 
-        duration: 800, 
-        once: true,
-        easing: 'ease-in-out'
-    });
+    AOS.init({ duration: 800, once: true });
 
     // Данные товаров
     const products = [
@@ -220,25 +216,23 @@
             } else {
                 container.innerHTML = filtered.map((product, index) => `
                     <div class="col-md-6 col-lg-4">
-                        <div class="product-card h-100">
+                        <div class="product-card">
                             ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
                             <img src="${product.image}" class="img-fluid" alt="${product.name}" 
                                  onerror="this.src='https://via.placeholder.com/250x250?text=Нет+фото'">
-                            <div class="d-flex flex-column h-100">
-                                <h5>${product.name}</h5>
-                                <p class="price mt-auto">${product.price} ₽</p>
-                                <div class="d-flex gap-2">
-                                    <a href="${product.link}" class="btn btn-outline-primary flex-grow-1">
-                                        <i class="bi bi-eye me-1"></i>Подробнее
-                                    </a>
-                                    <button class="btn btn-primary add-to-cart-btn flex-grow-1" 
-                                            data-id="${product.id}"
-                                            data-name="${product.name}"
-                                            data-price="${product.price}"
-                                            data-image="${product.image}">
-                                        <i class="bi bi-cart-plus"></i> В корзину
-                                    </button>
-                                </div>
+                            <h5>${product.name}</h5>
+                            <p class="price">${product.price} ₽</p>
+                            <div class="d-flex gap-2">
+                                <a href="${product.link}" class="btn btn-success flex-grow-1">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i>Подробнее
+                                </a>
+                                <button class="btn btn-primary add-to-cart-btn flex-grow-1" 
+                                        data-id="${product.id}"
+                                        data-name="${product.name}"
+                                        data-price="${product.price}"
+                                        data-image="${product.image}">
+                                    <i class="bi bi-cart-plus"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -269,89 +263,17 @@
             id: this.dataset.id,
             name: this.dataset.name,
             price: parseInt(this.dataset.price),
-            image: this.dataset.image,
-            quantity: 1
+            image: this.dataset.image
         };
         
-        // Проверяем, существует ли функция addToCart из cart.js
-        if (typeof window.addToCart === 'function') {
-            window.addToCart(product);
-        } else {
-            // Если функция не найдена, используем локальную
-            addToCartLocal(product);
+        // Используем CartManager
+        if (window.CartManager) {
+            window.CartManager.addToCart(product);
         }
-    }
-
-    // Локальная функция добавления в корзину (на случай отсутствия cart.js)
-    function addToCartLocal(product) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const existingItem = cart.find(item => item.id === product.id);
-        
-        if (existingItem) {
-            existingItem.quantity = (existingItem.quantity || 1) + 1;
-        } else {
-            cart.push(product);
-        }
-        
-        localStorage.setItem('cart', JSON.stringify(cart));
-        showNotification('Товар добавлен в корзину!', 'success');
-        
-        // Обновляем счетчик
-        updateCartCountLocal();
-    }
-
-    // Локальное обновление счетчика
-    function updateCartCountLocal() {
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-        const cartCounts = document.querySelectorAll('.cart-count');
-        
-        cartCounts.forEach(badge => {
-            if (totalItems > 0) {
-                badge.classList.remove('d-none');
-                badge.textContent = totalItems;
-            } else {
-                badge.classList.add('d-none');
-            }
-        });
-    }
-
-    // Функция для уведомлений
-    function showNotification(message, type = 'success') {
-        const container = document.getElementById('notification-container');
-        if (!container) return;
-        
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        
-        let icon = type === 'success' ? 'check-circle-fill' : 'info-circle-fill';
-        
-        notification.innerHTML = `
-            <i class="bi bi-${icon} me-2" style="color: ${type === 'success' ? '#10b981' : '#3b82f6'};"></i>
-            <span class="flex-grow-1">${message}</span>
-            <button class="btn-close btn-sm ms-2" onclick="this.parentElement.remove()"></button>
-        `;
-        
-        container.appendChild(notification);
-        
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.style.animation = 'slideOutRight 0.3s ease forwards';
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.remove();
-                    }
-                }, 300);
-            }
-        }, 3000);
     }
 
     // Инициализация при загрузке
     document.addEventListener('DOMContentLoaded', function() {
-        // Обновляем счетчик корзины
-        updateCartCountLocal();
-        
-        // Отображаем товары
         displayProducts('all');
         
         // Обработчики фильтров
@@ -362,22 +284,6 @@
                 displayProducts(this.dataset.filter);
             });
         });
-        
-        // Кнопка "Наверх"
-        const scrollBtn = document.getElementById('scrollTopBtn');
-        if (scrollBtn) {
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    scrollBtn.classList.add('show');
-                } else {
-                    scrollBtn.classList.remove('show');
-                }
-            });
-            
-            scrollBtn.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
     });
 </script>
 </body>
