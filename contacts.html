@@ -39,7 +39,7 @@
                 <li class="nav-item">
                     <a class="nav-link cart-link" href="cart.html" id="cartLink">
                         <i class="bi bi-cart3"></i> Корзина
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary cart-count d-none">0</span>
+                        <span class="cart-count d-none">0</span>
                     </a>
                 </li>
             </ul>
@@ -49,12 +49,11 @@
 
 <!-- Хлебные крошки -->
 <div class="container mt-5 pt-5">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none">Главная</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Контакты</li>
-        </ol>
-    </nav>
+    <div class="breadcrumb-custom" data-aos="fade-up">
+        <a href="index.html">Главная</a>
+        <i class="bi bi-chevron-right"></i>
+        <span class="active">Контакты</span>
+    </div>
 </div>
 
 <!-- Заголовок -->
@@ -72,7 +71,7 @@
     <div class="container">
         <div class="row g-4">
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="contact-card bg-white p-4 rounded-4 shadow-sm text-center h-100">
+                <div class="bg-white p-4 rounded-4 shadow-sm text-center h-100">
                     <i class="bi bi-telephone display-4 text-primary mb-3"></i>
                     <h3 class="h5 fw-bold mb-3">Телефон</h3>
                     <p class="text-secondary mb-0">+7 (495) 123-45-67</p>
@@ -80,7 +79,7 @@
                 </div>
             </div>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="contact-card bg-white p-4 rounded-4 shadow-sm text-center h-100">
+                <div class="bg-white p-4 rounded-4 shadow-sm text-center h-100">
                     <i class="bi bi-envelope display-4 text-primary mb-3"></i>
                     <h3 class="h5 fw-bold mb-3">Email</h3>
                     <p class="text-secondary mb-0">info@zveromir.ru</p>
@@ -88,7 +87,7 @@
                 </div>
             </div>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="contact-card bg-white p-4 rounded-4 shadow-sm text-center h-100">
+                <div class="bg-white p-4 rounded-4 shadow-sm text-center h-100">
                     <i class="bi bi-geo-alt display-4 text-primary mb-3"></i>
                     <h3 class="h5 fw-bold mb-3">Адрес</h3>
                     <p class="text-secondary mb-0">Красная пл., 3, Москва</p>
@@ -120,7 +119,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Телефон</label>
-                                <input type="tel" class="form-control form-control-lg" placeholder="+7 (999) 123-45-67">
+                                <input type="tel" class="form-control form-control-lg">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Тип питомца</label>
@@ -156,7 +155,7 @@
 <section class="py-5">
     <div class="container">
         <h2 class="text-center fw-bold mb-5" data-aos="fade-up">Наше местоположение</h2>
-        <div class="map-container rounded-4 overflow-hidden shadow" data-aos="fade-up">
+        <div class="rounded-4 overflow-hidden shadow" data-aos="fade-up">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.373789929247!2d37.61773491593037!3d55.75199498055105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a5a738fa419%3A0x7c347d506b52311f!2z0JzQvtGB0LrQstCw!5e0!3m2!1sru!2sru!4v1645451234567!5m2!1sru!2sru" 
                     width="100%" 
                     height="450" 
@@ -167,6 +166,14 @@
         </div>
     </div>
 </section>
+
+<!-- Кнопка наверх -->
+<button id="scrollTopBtn" class="btn btn-primary">
+    <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- Уведомления -->
+<div id="notification-container"></div>
 
 <!-- Футер -->
 <footer class="bg-dark text-white py-5 mt-5">
@@ -211,7 +218,9 @@
         e.preventDefault();
         
         if (this.checkValidity()) {
-            showNotification('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.', 'success');
+            if (window.CartManager) {
+                window.CartManager.showNotification('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.', 'success');
+            }
             this.reset();
             this.classList.remove('was-validated');
         } else {
