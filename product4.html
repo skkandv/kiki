@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Набор игрушек для кошек - ЗвероМир</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background-color: #fafbfc;
+            color: #1e293b;
+            padding-top: 76px;
+        }
+        
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #1e293b;
+        }
+        
+        .navbar-brand i {
+            color: #3b82f6;
+        }
+        
+        .nav-link {
+            color: #64748b !important;
+            font-weight: 500;
+        }
+        
+        .nav-link.active {
+            color: #3b82f6 !important;
+        }
+        
+        .cart-count {
+            background-color: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .breadcrumb {
+            background: #f8fafc;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid #f1f5f9;
+        }
+        
+        .breadcrumb a {
+            color: #64748b;
+            text-decoration: none;
+        }
+        
+        .breadcrumb .active {
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        .product-image {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            border: 1px solid #f1f5f9;
+        }
+        
+        .product-image img {
+            max-height: 400px;
+            object-fit: contain;
+        }
+        
+        .price-block {
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+        
+        .specs-list {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid #f1f5f9;
+        }
+        
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+        
+        .spec-item span:first-child {
+            font-weight: 600;
+            color: #64748b;
+        }
+        
+        .btn-primary {
+            background: #3b82f6;
+            border: none;
+            border-radius: 40px;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-outline-secondary {
+            border: 2px solid #e2e8f0;
+            color: #64748b;
+            border-radius: 40px;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+        }
+        
+        .btn-outline-secondary:hover {
+            background: #f8fafc;
+            color: #1e293b;
+        }
+        
+        footer {
+            background: #1e293b;
+            color: white;
+            margin-top: 4rem;
+            padding: 3rem 0;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 40px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-left: 4px solid #10b981;
+            z-index: 9999;
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Навигационная панель -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <i class="bi bi-tree-fill"></i> ЗвероМир
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="catalog.html">Каталог</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contacts.html">Контакты</a>
+                </li>
+                <li class="nav-item position-relative">
+                    <a class="nav-link" href="cart.html">
+                        <i class="bi bi-cart3"></i> Корзина
+                        <span class="cart-count" id="cartCount" style="display: none;">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Хлебные крошки -->
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Главная</a></li>
+            <li class="breadcrumb-item"><a href="catalog.html">Каталог</a></li>
+            <li class="breadcrumb-item"><a href="catalog.html?filter=toys">Игрушки</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Набор игрушек для кошек</li>
+        </ol>
+    </nav>
+</div>
+
+<!-- Товар -->
+<section class="py-4">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <div class="product-image text-center">
+                    <img src="https://api.zapovednik96.ru/upload/iblock/500/500fc4b9103d50aaf9e6d7cd3fbefd99.jpg" 
+                         alt="Набор игрушек для кошек" 
+                         class="img-fluid"
+                         onerror="this.src='https://via.placeholder.com/400x400?text=Нет+фото'">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold mb-4">Набор игрушек-удочек для кошек (4 штуки)</h1>
+                
+                <div class="price-block mb-4">
+                    <div class="text-center">
+                        <span class="price">700 ₽</span>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <button class="btn btn-primary btn-lg w-100 mb-3" id="addToCartBtn">
+                        <i class="bi bi-cart-plus me-2"></i>Добавить в корзину
+                    </button>
+                    <a href="catalog.html" class="btn btn-outline-secondary btn-lg w-100">
+                        <i class="bi bi-arrow-left me-2"></i>Продолжить покупки
+                    </a>
+                </div>
+                
+                <div class="bg-light p-4 rounded-4">
+                    <p class="lead mb-0">Комплект из 4 разнообразных игрушек-удочек для активных игр с вашей кошкой. Каждая удочка имеет уникальную насадку, чтобы заинтересовать даже самого привередливого питомца.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Характеристики -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5">Характеристики</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="specs-list">
+                    <div class="spec-item">
+                        <span>Количество:</span>
+                        <span class="fw-bold">4 штуки</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Длина удочки:</span>
+                        <span class="fw-bold">60 см</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Материал ручки:</span>
+                        <span class="fw-bold">Пластик с покрытием</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Вес набора:</span>
+                        <span class="fw-bold">150 г</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Возраст кошки:</span>
+                        <span class="fw-bold">от 3 месяцев</span>
+                    </div>
+                    <div class="spec-item">
+                        <span>Безопасность:</span>
+                        <span class="fw-bold">Все детали надежно закреплены</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Подробное описание -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5">Подробное описание</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="bg-white p-5 rounded-4 shadow-sm">
+                    <p>Набор из 4 игрушек-удочек для кошек — это идеальное решение для разнообразия игрового процесса с вашим питомцем. Каждая удочка предлагает уникальный тип взаимодействия, что помогает поддерживать интерес кошки к играм.</p>
+                    
+                    <h5 class="fw-bold mt-4 mb-3">Преимущества набора:</h5>
+                    <ul>
+                        <li><strong>Разнообразие</strong> — 4 разных типа игрушек в одном наборе</li>
+                        <li><strong>Долговечность</strong> — прочные материалы выдерживают активные игры</li>
+                        <li><strong>Безопасность</strong> — все элементы надежно закреплены</li>
+                        <li><strong>Удобство</strong> — легкие удочки удобно лежат в руке</li>
+                        <li><strong>Экономия</strong> — покупка набора выгоднее, чем отдельных удочек</li>
+                    </ul>
+                    
+                    <h5 class="fw-bold mt-4 mb-3">Игрушки-удочки помогают:</h5>
+                    <ul>
+                        <li>Поддерживать физическую активность кошки</li>
+                        <li>Укреплять связь между питомцем и хозяином</li>
+                        <li>Предотвращать ожирение через регулярные игры</li>
+                        <li>Снижать стресс и скуку у домашних кошек</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Похожие товары -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5">Похожие товары</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="https://aqplus.ru/upload/resize_cache/iblock/6ba/1200_1200_140cd750bba9870f18aada2478b24840a/ezvguzrqlldu1kr1p1bsrg2urei8o5ng.jpg" class="card-img-top p-3" alt="Игрушка для собак" style="height: 200px; object-fit: contain;">
+                    <div class="card-body">
+                        <h5 class="card-title">Игрушка для собак (кость)</h5>
+                        <p class="card-text text-primary fw-bold fs-4">450 ₽</p>
+                        <a href="product3.html" class="btn btn-outline-primary w-100">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="https://shop.purina.ru/media/catalog/product//1/0/104ab9ae-5e12-11ee-aa1b-067a761482e2_jfnxm2svorofzwvq.webp" class="card-img-top p-3" alt="Корм для кошек" style="height: 200px; object-fit: contain;">
+                    <div class="card-body">
+                        <h5 class="card-title">Корм для кошек Purina One</h5>
+                        <p class="card-text text-primary fw-bold fs-4">950 ₽</p>
+                        <a href="product2.html" class="btn btn-outline-primary w-100">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <img src="https://dolinaakvariumov.ru/image/cache/catalog/Akvas_2024/pryamoj/50loreh-300x300.jpg" class="card-img-top p-3" alt="Аквариум" style="height: 200px; object-fit: contain;">
+                    <div class="card-body">
+                        <h5 class="card-title">Аквариум 50 литров</h5>
+                        <p class="card-text text-primary fw-bold fs-4">3500 ₽</p>
+                        <a href="product5.html" class="btn btn-outline-primary w-100">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Футер -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h4 class="mb-4"><i class="bi bi-tree-fill text-primary"></i> ЗвероМир</h4>
+                <p class="text-secondary">Забота о ваших питомцах — наша главная миссия.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-4">Контакты</h5>
+                <p><i class="bi bi-telephone me-2"></i> +7 (495) 123-45-67</p>
+                <p><i class="bi bi-envelope me-2"></i> info@zveromir.ru</p>
+                <p><i class="bi bi-geo-alt me-2"></i> Красная пл., 3, Москва</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-4">Режим работы</h5>
+                <p class="text-secondary">Ежедневно с 9:00 до 21:00</p>
+                <div class="social-links">
+                    <a href="#" class="text-white me-3"><i class="bi bi-telegram fs-4"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-whatsapp fs-4"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-instagram fs-4"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="bg-secondary">
+        <p class="text-center text-secondary mb-0">&copy; 2026 Все права защищены. Зоомагазин "ЗвероМир"</p>
+    </div>
+</footer>
+
+<!-- Уведомления -->
+<div id="notification-container"></div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        const counter = document.getElementById('cartCount');
+        
+        if (counter) {
+            if (total > 0) {
+                counter.style.display = 'inline';
+                counter.textContent = total;
+            } else {
+                counter.style.display = 'none';
+            }
+        }
+    }
+
+    function showNotification(message) {
+        const container = document.getElementById('notification-container');
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.innerHTML = `
+            <i class="bi bi-check-circle-fill me-2" style="color: #10b981;"></i>
+            <span>${message}</span>
+        `;
+        
+        container.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+
+    document.getElementById('addToCartBtn').addEventListener('click', function() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        const product = {
+            id: 'product4',
+            name: 'Набор игрушек-удочек для кошек',
+            price: 700,
+            image: 'https://api.zapovednik96.ru/upload/iblock/500/500fc4b9103d50aaf9e6d7cd3fbefd99.jpg',
+            quantity: 1
+        };
+        
+        const existing = cart.find(item => item.id === product.id);
+        
+        if (existing) {
+            existing.quantity += 1;
+        } else {
+            cart.push(product);
+        }
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        showNotification('Товар добавлен в корзину!');
+    });
+
+    document.addEventListener('DOMContentLoaded', updateCartCount);
+</script>
+
+</body>
+</html>

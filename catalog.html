@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - Зоомагазин "ЗвероМир"</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Навигационная панель -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <i class="bi bi-tree-fill"></i> ЗвероМир
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="catalog.html">Каталог</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contacts.html">Контакты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cart-link" href="cart.html">
+                        <i class="bi bi-cart3"></i> Корзина
+                        <span class="cart-count d-none">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Хлебные крошки -->
+<div class="container mt-4">
+    <div class="breadcrumb-custom" data-aos="fade-up">
+        <a href="index.html">Главная</a>
+        <i class="bi bi-chevron-right"></i>
+        <span class="active">Каталог</span>
+    </div>
+</div>
+
+<!-- Заголовок -->
+<section class="py-4">
+    <div class="container text-center" data-aos="fade-up">
+        <h1 class="display-4 fw-bold mb-4">Каталог товаров</h1>
+        <p class="lead text-secondary mx-auto" style="max-width: 700px;" data-aos="fade-up" data-aos-delay="100">
+            Здесь вы найдёте всё необходимое для ваших любимых питомцев
+        </p>
+    </div>
+</section>
+
+<!-- Кнопки-фильтры -->
+<div class="container mb-5">
+    <div class="d-flex justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="200">
+        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn category-btn active" data-filter="all">
+            <i class="bi bi-grid-3x3-gap-fill me-2"></i>Все товары
+        </button>
+        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn category-btn" data-filter="dogs">
+            <i class="bi bi-emoji-smile me-2"></i>🐕 Собаки
+        </button>
+        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn category-btn" data-filter="cats">
+            <i class="bi bi-emoji-smile me-2"></i>🐈 Кошки
+        </button>
+        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn category-btn" data-filter="fish">
+            <i class="bi bi-water me-2"></i>🐟 Рыбки
+        </button>
+        <button class="btn btn-outline-primary rounded-pill px-4 py-2 filter-btn category-btn" data-filter="toys">
+            <i class="bi bi-controller me-2"></i>🎾 Игрушки
+        </button>
+    </div>
+</div>
+
+<!-- Индикатор загрузки -->
+<div class="loading-spinner" id="loadingSpinner">
+    <div class="loader"></div>
+    <p class="mt-3 text-secondary">Загрузка товаров...</p>
+</div>
+
+<!-- Товары -->
+<div class="container">
+    <div class="row g-4" id="productsContainer"></div>
+</div>
+
+<!-- Кнопка наверх -->
+<button id="scrollTopBtn" class="btn btn-primary">
+    <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- Уведомления -->
+<div id="notification-container"></div>
+
+<!-- Футер -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <h4 class="mb-4"><i class="bi bi-tree-fill text-primary"></i> ЗвероМир</h4>
+                <p class="text-secondary">Забота о ваших питомцах — наша главная миссия.</p>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <h5 class="mb-4">Контакты</h5>
+                <p><i class="bi bi-telephone me-2"></i> +7 (495) 123-45-67</p>
+                <p><i class="bi bi-envelope me-2"></i> info@zveromir.ru</p>
+                <p><i class="bi bi-geo-alt me-2"></i> Красная пл., 3, Москва</p>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <h5 class="mb-4">Режим работы</h5>
+                <p class="text-secondary">Ежедневно с 9:00 до 21:00</p>
+                <div class="social-links">
+                    <a href="#"><i class="bi bi-telegram"></i></a>
+                    <a href="#"><i class="bi bi-whatsapp"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="bg-secondary">
+        <p class="text-center text-secondary mb-0">&copy; 2026 Все права защищены. Зоомагазин "ЗвероМир"</p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Cart JS -->
+<script src="cart.js"></script>
+<script>
+    // Инициализация AOS
+    AOS.init({ 
+        duration: 800, 
+        once: true,
+        easing: 'ease-in-out'
+    });
+
+    // Данные товаров
+    const products = [
+        { 
+            id: 'product1', 
+            name: 'Корм для собак Purina One МИНИ 600 г', 
+            price: 350, 
+            image: 'https://shop.purina.ru/media/catalog/product//5/2/52530a60-5947-11ee-8527-06612dae177d_jedk5vrzirrvaqpb.png', 
+            category: 'dogs',
+            link: 'product1.html',
+            badge: 'Хит'
+        },
+        { 
+            id: 'product2', 
+            name: 'Корм для кошек Purina One с курицей 1,5 кг', 
+            price: 950, 
+            image: 'https://shop.purina.ru/media/catalog/product//1/0/104ab9ae-5e12-11ee-aa1b-067a761482e2_jfnxm2svorofzwvq.webp', 
+            category: 'cats',
+            link: 'product2.html',
+            badge: 'Новинка'
+        },
+        { 
+            id: 'product3', 
+            name: 'Игрушка для собак (кость)', 
+            price: 450, 
+            image: 'https://aqplus.ru/upload/resize_cache/iblock/6ba/1200_1200_140cd750bba9870f18aada2478b24840a/ezvguzrqlldu1kr1p1bsrg2urei8o5ng.jpg', 
+            category: 'toys',
+            link: 'product3.html'
+        },
+        { 
+            id: 'product4', 
+            name: 'Набор игрушек-удочек для кошек', 
+            price: 700, 
+            image: 'https://api.zapovednik96.ru/upload/iblock/500/500fc4b9103d50aaf9e6d7cd3fbefd99.jpg', 
+            category: 'toys',
+            link: 'product4.html',
+            badge: 'Скидка 10%'
+        },
+        { 
+            id: 'product5', 
+            name: 'Аквариум 50 литров полный комплект', 
+            price: 3500, 
+            image: 'https://dolinaakvariumov.ru/image/cache/catalog/Akvas_2024/pryamoj/50loreh-300x300.jpg', 
+            category: 'fish',
+            link: 'product5.html'
+        }
+    ];
+
+    // Функция для отображения товаров
+    function displayProducts(filter = 'all') {
+        const container = document.getElementById('productsContainer');
+        const spinner = document.getElementById('loadingSpinner');
+        
+        if (!container) return;
+        
+        spinner.classList.add('show');
+        
+        setTimeout(() => {
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-emoji-frown display-1 text-secondary mb-4"></i>
+                        <h3 class="fw-bold mb-3">Товары не найдены</h3>
+                        <p class="text-secondary mb-4">В этой категории пока нет товаров</p>
+                        <button class="btn btn-primary filter-btn" data-filter="all">Показать все товары</button>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = filtered.map((product, index) => `
+                    <div class="col-md-6 col-lg-4">
+                        <div class="product-card h-100">
+                            ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                            <img src="${product.image}" class="img-fluid" alt="${product.name}" 
+                                 onerror="this.src='https://via.placeholder.com/250x250?text=Нет+фото'">
+                            <div class="d-flex flex-column h-100">
+                                <h5>${product.name}</h5>
+                                <p class="price mt-auto">${product.price} ₽</p>
+                                <div class="d-flex gap-2">
+                                    <a href="${product.link}" class="btn btn-outline-primary flex-grow-1">
+                                        <i class="bi bi-eye me-1"></i>Подробнее
+                                    </a>
+                                    <button class="btn btn-primary add-to-cart-btn flex-grow-1" 
+                                            data-id="${product.id}"
+                                            data-name="${product.name}"
+                                            data-price="${product.price}"
+                                            data-image="${product.image}">
+                                        <i class="bi bi-cart-plus"></i> В корзину
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            spinner.classList.remove('show');
+            
+            // Добавляем обработчики для кнопок "В корзину"
+            attachAddToCartHandlers();
+        }, 300);
+    }
+
+    // Функция для обработки кнопок добавления в корзину
+    function attachAddToCartHandlers() {
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.removeEventListener('click', handleAddToCart);
+            btn.addEventListener('click', handleAddToCart);
+        });
+    }
+
+    // Обработчик добавления в корзину
+    function handleAddToCart(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const product = {
+            id: this.dataset.id,
+            name: this.dataset.name,
+            price: parseInt(this.dataset.price),
+            image: this.dataset.image,
+            quantity: 1
+        };
+        
+        // Проверяем, существует ли функция addToCart из cart.js
+        if (typeof window.addToCart === 'function') {
+            window.addToCart(product);
+        } else {
+            // Если функция не найдена, используем локальную
+            addToCartLocal(product);
+        }
+    }
+
+    // Локальная функция добавления в корзину (на случай отсутствия cart.js)
+    function addToCartLocal(product) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingItem = cart.find(item => item.id === product.id);
+        
+        if (existingItem) {
+            existingItem.quantity = (existingItem.quantity || 1) + 1;
+        } else {
+            cart.push(product);
+        }
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showNotification('Товар добавлен в корзину!', 'success');
+        
+        // Обновляем счетчик
+        updateCartCountLocal();
+    }
+
+    // Локальное обновление счетчика
+    function updateCartCountLocal() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+        const cartCounts = document.querySelectorAll('.cart-count');
+        
+        cartCounts.forEach(badge => {
+            if (totalItems > 0) {
+                badge.classList.remove('d-none');
+                badge.textContent = totalItems;
+            } else {
+                badge.classList.add('d-none');
+            }
+        });
+    }
+
+    // Функция для уведомлений
+    function showNotification(message, type = 'success') {
+        const container = document.getElementById('notification-container');
+        if (!container) return;
+        
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        
+        let icon = type === 'success' ? 'check-circle-fill' : 'info-circle-fill';
+        
+        notification.innerHTML = `
+            <i class="bi bi-${icon} me-2" style="color: ${type === 'success' ? '#10b981' : '#3b82f6'};"></i>
+            <span class="flex-grow-1">${message}</span>
+            <button class="btn-close btn-sm ms-2" onclick="this.parentElement.remove()"></button>
+        `;
+        
+        container.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.animation = 'slideOutRight 0.3s ease forwards';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }
+        }, 3000);
+    }
+
+    // Инициализация при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+        // Обновляем счетчик корзины
+        updateCartCountLocal();
+        
+        // Отображаем товары
+        displayProducts('all');
+        
+        // Обработчики фильтров
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                displayProducts(this.dataset.filter);
+            });
+        });
+        
+        // Кнопка "Наверх"
+        const scrollBtn = document.getElementById('scrollTopBtn');
+        if (scrollBtn) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollBtn.classList.add('show');
+                } else {
+                    scrollBtn.classList.remove('show');
+                }
+            });
+            
+            scrollBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Зоомагазин "ЗвероМир"</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Навигационная панель -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <div class="container">
+        <a class="navbar-brand logo" href="index.html">
+            <i class="bi bi-tree-fill text-primary"></i> ЗвероМир
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="catalog.html">Каталог</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="contacts.html">Контакты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cart-link" href="cart.html" id="cartLink">
+                        <i class="bi bi-cart3"></i> Корзина
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary cart-count d-none">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Хлебные крошки -->
+<div class="container mt-5 pt-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Контакты</li>
+        </ol>
+    </nav>
+</div>
+
+<!-- Заголовок -->
+<section class="py-4">
+    <div class="container text-center" data-aos="fade-up">
+        <h1 class="display-4 fw-bold mb-4">Контакты</h1>
+        <p class="lead text-secondary mx-auto" style="max-width: 700px;">
+            Свяжитесь с нами любым удобным способом
+        </p>
+    </div>
+</section>
+
+<!-- Контактная информация -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="contact-card bg-white p-4 rounded-4 shadow-sm text-center h-100">
+                    <i class="bi bi-telephone display-4 text-primary mb-3"></i>
+                    <h3 class="h5 fw-bold mb-3">Телефон</h3>
+                    <p class="text-secondary mb-0">+7 (495) 123-45-67</p>
+                    <p class="text-secondary">Ежедневно с 9:00 до 21:00</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="contact-card bg-white p-4 rounded-4 shadow-sm text-center h-100">
+                    <i class="bi bi-envelope display-4 text-primary mb-3"></i>
+                    <h3 class="h5 fw-bold mb-3">Email</h3>
+                    <p class="text-secondary mb-0">info@zveromir.ru</p>
+                    <p class="text-secondary">support@zveromir.ru</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="contact-card bg-white p-4 rounded-4 shadow-sm text-center h-100">
+                    <i class="bi bi-geo-alt display-4 text-primary mb-3"></i>
+                    <h3 class="h5 fw-bold mb-3">Адрес</h3>
+                    <p class="text-secondary mb-0">Красная пл., 3, Москва</p>
+                    <p class="text-secondary">3 этаж, офис 312</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Форма обратной связи -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="bg-white p-5 rounded-4 shadow-sm" data-aos="fade-up">
+                    <h2 class="text-center fw-bold mb-4">Напишите нам</h2>
+                    <form id="contactForm" class="needs-validation" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Имя</label>
+                                <input type="text" class="form-control form-control-lg" required>
+                                <div class="invalid-feedback">Введите имя</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control form-control-lg" required>
+                                <div class="invalid-feedback">Введите корректный email</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Телефон</label>
+                                <input type="tel" class="form-control form-control-lg" placeholder="+7 (999) 123-45-67">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Тип питомца</label>
+                                <select class="form-select form-control-lg">
+                                    <option value="">Выберите</option>
+                                    <option value="dog">Собака</option>
+                                    <option value="cat">Кошка</option>
+                                    <option value="fish">Рыбки</option>
+                                    <option value="bird">Птицы</option>
+                                    <option value="rodent">Грызуны</option>
+                                    <option value="reptile">Рептилии</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Сообщение</label>
+                                <textarea class="form-control form-control-lg" rows="5" required></textarea>
+                                <div class="invalid-feedback">Введите сообщение</div>
+                            </div>
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
+                                    <i class="bi bi-send me-2"></i>Отправить сообщение
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Карта -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5" data-aos="fade-up">Наше местоположение</h2>
+        <div class="map-container rounded-4 overflow-hidden shadow" data-aos="fade-up">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2245.373789929247!2d37.61773491593037!3d55.75199498055105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a5a738fa419%3A0x7c347d506b52311f!2z0JzQvtGB0LrQstCw!5e0!3m2!1sru!2sru!4v1645451234567!5m2!1sru!2sru" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy"
+                    title="Карта"></iframe>
+        </div>
+    </div>
+</section>
+
+<!-- Футер -->
+<footer class="bg-dark text-white py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h4 class="mb-4"><i class="bi bi-tree-fill text-primary"></i> ЗвероМир</h4>
+                <p class="text-secondary">Забота о ваших питомцах — наша главная миссия.</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-4">Контакты</h5>
+                <p class="text-secondary"><i class="bi bi-telephone me-2"></i> +7 (495) 123-45-67</p>
+                <p class="text-secondary"><i class="bi bi-envelope me-2"></i> info@zveromir.ru</p>
+                <p class="text-secondary"><i class="bi bi-geo-alt me-2"></i> Красная пл., 3, Москва</p>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="mb-4">Режим работы</h5>
+                <p class="text-secondary">Ежедневно с 9:00 до 21:00</p>
+                <div class="social-links">
+                    <a href="#" class="text-white me-3"><i class="bi bi-telegram fs-4"></i></a>
+                    <a href="#" class="text-white me-3"><i class="bi bi-whatsapp fs-4"></i></a>
+                    <a href="#" class="text-white"><i class="bi bi-instagram fs-4"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="bg-secondary">
+        <p class="text-center text-secondary mb-0">&copy; 2026 Все права защищены. Зоомагазин "ЗвероМир"</p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- Cart JS -->
+<script src="cart.js"></script>
+<script>
+    AOS.init({ duration: 800, once: true });
+
+    // Валидация формы
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (this.checkValidity()) {
+            showNotification('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.', 'success');
+            this.reset();
+            this.classList.remove('was-validated');
+        } else {
+            this.classList.add('was-validated');
+        }
+    });
+</script>
+</body>
+</html>
